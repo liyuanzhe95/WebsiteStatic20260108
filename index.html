@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery - GithubTest</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>📸 Photo Gallery</h1>
+        <p>Beautiful photos from the GithubTest collection</p>
+    </header>
+
+    <main>
+        <div class="gallery-container">
+            <div class="gallery-grid" id="gallery">
+                <!-- Sample images - these will be replaced when you add real photos -->
+                <div class="photo-item">
+                    <img src="https://picsum.photos/400/300?random=1" alt="Sample Photo 1" onclick="openModal(this)">
+                    <div class="photo-overlay">
+                        <span class="photo-title">Sample Photo 1</span>
+                    </div>
+                </div>
+                <div class="photo-item">
+                    <img src="https://picsum.photos/400/300?random=2" alt="Sample Photo 2" onclick="openModal(this)">
+                    <div class="photo-overlay">
+                        <span class="photo-title">Sample Photo 2</span>
+                    </div>
+                </div>
+                <div class="photo-item">
+                    <img src="https://picsum.photos/400/300?random=3" alt="Sample Photo 3" onclick="openModal(this)">
+                    <div class="photo-overlay">
+                        <span class="photo-title">Sample Photo 3</span>
+                    </div>
+                </div>
+                <div class="photo-item">
+                    <img src="https://picsum.photos/400/300?random=4" alt="Sample Photo 4" onclick="openModal(this)">
+                    <div class="photo-overlay">
+                        <span class="photo-title">Sample Photo 4</span>
+                    </div>
+                </div>
+                <div class="photo-item">
+                    <img src="https://picsum.photos/400/300?random=5" alt="Sample Photo 5" onclick="openModal(this)">
+                    <div class="photo-overlay">
+                        <span class="photo-title">Sample Photo 5</span>
+                    </div>
+                </div>
+                <div class="photo-item">
+                    <img src="https://picsum.photos/400/300?random=6" alt="Sample Photo 6" onclick="openModal(this)">
+                    <div class="photo-overlay">
+                        <span class="photo-title">Sample Photo 6</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions for adding your own photos -->
+        <div class="instructions">
+            <h3>🎯 How to Add Your Photos</h3>
+            <ol>
+                <li>Place your image files (jpg, png, gif, etc.) in the GithubTest folder</li>
+                <li>Update the gallery by replacing the sample images with your photos</li>
+                <li>The gallery supports common formats: JPG, PNG, GIF, WebP</li>
+            </ol>
+        </div>
+    </main>
+
+    <!-- Modal for full-size image viewing -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img id="modalImage" src="" alt="">
+            <div class="modal-caption" id="modalCaption"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Photo Gallery | Created for GithubTest</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

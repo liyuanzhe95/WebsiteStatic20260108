@@ -1,0 +1,66 @@
+name: PhotoGallery Deployment
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - '**/*.html'
+      - '**/*.css'
+      - '**/*.js'
+      - 'deployment-nginx.config.yml'
+      - '.github/workflows/deploy-nginx.yml'
+  pull_request:
+    branches: [ main, master ]
+    paths:
+      - '**/*.html'
+      - '**/*.css'
+      - '**/*.js'
+      - 'deployment-nginx.config.yml'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: false
+        default: 'production'
+        type: choice
+        options:
+          - production
+          - staging
+
+permissions:
+  id-token: write   # Required for OIDC authentication
+  contents: read    # Required to checkout code
+
+jobs:
+  deploy:
+    name: Deploy PhotoGallery
+    # Use reusable workflow from source repo - always gets latest fixes
+    uses: naveenraj44125-creator/lamp-stack-lightsail/.github/workflows/deploy-generic-reusable.yml@main
+    with:
+      config_file: 'deployment-nginx.config.yml'
+      aws_region: 'us-east-1'
+    secrets: inherit
+  
+  summary:
+    name: Deployment Summary
+    needs: deploy
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Show Deployment Results
+        run: |
+          echo "## 🚀 PhotoGallery Deployment" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **URL**: ${{ needs.deploy.outputs.deployment_url }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Status**: ${{ needs.deploy.outputs.deployment_status }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ needs.deploy.outputs.deployment_status }}" = "success" ]; then
+            echo "✅ Application deployed successfully!" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### 🌐 Static Site" >> $GITHUB_STEP_SUMMARY
+            echo "- **Server**: Nginx" >> $GITHUB_STEP_SUMMARY
+            echo "- **Content**: Static files" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ Deployment failed. Check logs above." >> $GITHUB_STEP_SUMMARY
+          fi
