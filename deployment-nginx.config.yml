@@ -152,7 +152,7 @@ github_actions:
 monitoring:
   health_check:
     endpoint: "/"
-    expected_content: "PhotoGallery"
+    expected_content: "Photo Gallery"
     max_attempts: 15
     wait_between_attempts: 20
     initial_wait: 60
