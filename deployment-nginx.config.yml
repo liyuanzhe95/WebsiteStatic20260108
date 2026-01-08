@@ -21,14 +21,21 @@ application:
   type: nginx
   
   package_files:
-    - "./"
+    - "index.html"
+    - "styles.css" 
+    - "script.js"
+    - "*.html"
+    - "*.css"
+    - "*.js"
   
   package_fallback: true
+  deploy_to_webroot: true
   
   environment_variables:
     APP_ENV: production
     # Nginx specific
     NGINX_DOCUMENT_ROOT: /var/www/html
+    DEPLOY_FILES: "index.html styles.css script.js"
 
 dependencies:
   # Database Dependencies
